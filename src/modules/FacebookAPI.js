@@ -14,7 +14,7 @@ class FacebookAPI {
         FB.api(
             '/me',
             'GET',
-            {"fields": "friends{name,events{name, description, cover}}"},
+            {"fields": "friends{name,events{name, description, cover, place}}"},
             response => {
                 console.log('events',response);
                 if (response && !response.error) {
