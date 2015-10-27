@@ -12,11 +12,14 @@ class SplashView extends React.Component {
 
     constructor(props) {
         super(props);
-        //var delay = new Promise(resolve => setTimeout(resolve, 1000000));
-        //FacebookAPI.silentLogin({
-        //    success: () => delay.then(() => history.pushState({}, '/whogos/events')),
-        //    loginRequired: () => delay.then(() => history.pushState({}, '/whogos/login'))
-        //})
+        var delay = new Promise(resolve => setTimeout(resolve, 4500));
+        var getRoute = new Promise(resolve => {
+            FacebookAPI.silentLogin({
+               success: () => resolve('/whogos/events'),
+               loginRequired: () => resolve('/whogos/login')
+            });
+        });
+        delay.then(() => getRoute).then(route => history.pushState({}, route));
     }
 
     render() {

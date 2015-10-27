@@ -19,9 +19,8 @@ ReactDOM.render(
             <Route path="/whogos" component={WhogosApp}>
                 <Route path="splash" component={Splash}/>
                 <Route path="login" component={LoginView}/>
-                <Route path="events" component={EventsList}>
-                    <Route path=":eventId" component={EventDetails}/>
-                </Route>
+                <Route path="events" component={EventsList}/>
+                <Route path="event/:eventId" component={EventDetails}/>
             </Route>
             <Redirect from="*" to="/whogos/splash"/>
         </Router>
