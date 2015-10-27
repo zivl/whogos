@@ -1,11 +1,29 @@
 @import "variables";
 
 .login-view {
-  .login-logo {
+  display: flex;
+  flex-direction: column;
 
+  .login-logo {
+    background: url("/images/logo_eye.svg") no-repeat 80px 96px;
+    background-size: 75%;
+    flex-basis: 65%;
   }
+
   .login-text {
     background-color: $green;
     color: $white;
+    flex-basis: 35%;
+    font-size: 35px;
+    padding: 30px;
+    line-height: 1.1;
+
+    .login-button {
+      background: $white;
+      border: 2px solid $black;
+      padding: 5px;
+      font-size: 20px;
+      margin-top: 10px;
+    }
   }
 }
