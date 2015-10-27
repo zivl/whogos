@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import WhogosApp from './components/WhogosApp';
 
+import Splash from './components/SplashView';
 import EventsList from './components/EventsList';
 import LoginView from './components/LoginView';
 
@@ -15,10 +16,11 @@ ReactDOM.render(
     (
         <Router history={history}>
             <Route path="/whogos" component={WhogosApp}>
-                <Route path="events" component={EventsList}/>
+                <Route path="splash" component={Splash}/>
                 <Route path="login" component={LoginView}/>
+                <Route path="events" component={EventsList}/>
             </Route>
-            <Redirect from="*" to="/whogos/login"/>
+            <Redirect from="*" to="/whogos/splash"/>
         </Router>
     )
     , document.getElementById('app'));

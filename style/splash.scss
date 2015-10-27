@@ -1,0 +1,31 @@
+@import "variables";
+
+@keyframes play {
+  0% {background-position: 0;}
+  30% {background-position: 0;}
+  33% {background-position: -792px;}
+  34% {background-position: -792px;}
+  37% {background-position: 0;}
+  63% {background-position: 0;}
+  66% {background-position: -792px;}
+  67% {background-position: -792px;}
+  70% {background-position: 0;}
+  86% {background-position: 0;}
+  89% {background-position: -792px;}
+  90% {background-position: -792px;}
+  93% { background-position: 0; }
+  96% {background-position: -792px;}
+  97% {background-position: -792px;}
+  100% { background-position: 0; }
+}
+
+.splash-screen {
+  background-color: $green;
+  .splash-animation {
+    width: 264px;
+    height: 100vh;
+    background: url('/images/logo_animation.svg') no-repeat;
+    background-size: 1056px 314px;
+    animation: play 4s steps(3) infinite;
+  }
+}
