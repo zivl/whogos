@@ -14,7 +14,6 @@ export default class WhogosApp extends React.Component {
             <div className='app'>
                 <Header />
                 <div className="app-body">
-                    <h1>Hello World</h1>
                     {this.props.children}
                 </div>
                 <Footer />
