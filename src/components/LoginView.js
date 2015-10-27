@@ -3,6 +3,7 @@
  *
  */
 import React from 'react';
+import '../../style/login.scss';
 
 class LoginView extends React.Component {
 
@@ -58,8 +59,12 @@ class LoginView extends React.Component {
 
     render() {
         return (
-            <div>
-                <button onClick={this.handleClick}>Login</button>
+            <div className='login-view'>
+                <div className='login-logo'></div>
+                <div className='login-text'>
+                    <p>Please login with Facebook</p>
+                    <button onClick={this.handleClick}>Login</button>
+                </div>
             </div>
         );
     }
