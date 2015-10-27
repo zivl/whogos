@@ -30,6 +30,22 @@ class FacebookAPI {
         );
     }
 
+    getEventDetails(eventId, options) {
+        FB.api(
+            `/${eventId}`,
+            'GET',
+            {"fields": "category,cover,description,start_time,end_time,name,photos{picture},place{name,location{latitude,longitude,name,street,city,country}}"},
+            response => {
+                console.log('event',response);
+                if (response && !response.error) {
+                    options.success && options.success(response);
+                } else {
+                    options.error && options.error();
+                }
+            }
+        );
+    }
+
     login(options) {
         window.fbReady.then(() => {
             FB.login(response => {
