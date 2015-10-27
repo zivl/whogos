@@ -6,40 +6,12 @@ import React from 'react';
 
 class LoginView extends React.Component {
 
+    state = {
+        fbInit: false
+    }
+
     componentDidMount() {
-        window.fbAsyncInit = () => {
-            FB.init({
-                appId: '128622774162801',
-                cookie: true,  // enable cookies to allow the server to access the session
-                xfbml: true,  // parse social plugins on this page
-                version: 'v2.5' // use version 2.1
-            });
 
-            // Now that we've initialized the JavaScript SDK, we call
-            // FB.getLoginStatus().  This function gets the state of the
-            // person visiting this page and can return one of three states to
-            // the callback you provide.  They can be:
-            //
-            // 1. Logged into your app ('connected')
-            // 2. Logged into Facebook, but not your app ('not_authorized')
-            // 3. Not logged into Facebook and can't tell if they are logged into
-            //    your app or not.
-            //
-            // These three cases are handled in the callback function.
-            FB.getLoginStatus(function (response) {
-                this.statusChangeCallback(response);
-            }.bind(this));
-        };
-
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
     }
 
 // Here we run a very simple test of the Graph API after login is
@@ -83,7 +55,9 @@ class LoginView extends React.Component {
     }
 
     handleClick = () => {
-        FB.login(function(){}, {scope: 'user_about_me,user_friends,user_events,email'});
+        window.fbReady.then(() => {
+            FB.login(this.statusChangeCallback, {scope: 'user_about_me,user_friends,user_events,email'});
+        });
     }
 
     render() {
@@ -91,7 +65,7 @@ class LoginView extends React.Component {
             <div>
                 <a href="#" onClick={this.handleClick}>Login</a>
             </div>
-        )
+        );
     }
 }
 
