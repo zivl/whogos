@@ -4,6 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FaceBookAPI from '../modules/FacebookAPI';
+import Header from './Header';
 import { history } from 'react-router/lib/BrowserHistory';
 import '../../style/eventlist.scss';
 
@@ -16,14 +17,11 @@ export default class EventsList extends React.Component {
 
     componentWillMount() {
         FaceBookAPI.getFriendsEvents({
-
             success: this.friendEventsSuccess
-
         });
     }
 
     friendEventsSuccess = events => {
-        console.log(events);
         this.setState({events});
     }
 
@@ -36,7 +34,7 @@ export default class EventsList extends React.Component {
     renderEvent = (eventData) => {
         var picture = eventData.picture;
         var date = new Date(eventData.start_time);
-        var dateString = date.getMonth();
+        var dateString = date.toLocaleString('en-US', {month:'short', day: '2-digit', hour: '2-digit', minute:'2-digit', weekday:'long', hour12: false});
         return (
             <div className='event-item' key={eventData.id} onClick={this.eventDetailsWrapper(eventData.id)}>
                 <div className='image-wrapper'>
@@ -46,8 +44,8 @@ export default class EventsList extends React.Component {
                     }
                 </div>
                 <div className='event-desc'>
-                    <div className='name'>{eventData.name}</div>
-                    <div>{eventData['start_time']}</div>
+                    <div className='name truncate'>{eventData.name}</div>
+                    <div className='date-time'>{dateString}</div>
                 </div>
             </div>
         );
@@ -56,8 +54,9 @@ export default class EventsList extends React.Component {
     render() {
         return (
             <div>
-                <Header />
-
+                <Header>
+                    <span className='filters'>Filters</span>
+                </Header>
                 <div className='events-list'>{this.state.events.map(this.renderEvent)}</div>
             </div>
         );

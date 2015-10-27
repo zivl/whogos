@@ -3,9 +3,21 @@
 .header {
   background-color: $green;
   padding: 20px;
+  display: flex;
+  width: 100%;
+
+  .header-logo {
+    flex-basis: 15%;
+  }
 
   .header-title {
     color: $white;
     font-size: 20px;
+    flex-basis: 60%;
+    text-align: center;
+  }
+
+  .filters {
+    flex-basis: 20%;
   }
 }

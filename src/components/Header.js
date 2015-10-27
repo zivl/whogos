@@ -13,6 +13,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className='header'>
+                <div className='header-logo'></div>
                 <div className='header-title'>{this.props.title}</div>
                 {this.props.children}
             </div>
