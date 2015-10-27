@@ -4,6 +4,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FaceBookAPI from '../modules/FacebookAPI';
+import '../../style/eventlist.scss';
+
 
 export default class EventsList extends React.Component {
 
@@ -26,8 +28,10 @@ export default class EventsList extends React.Component {
 
     renderEvent = (eventData, key) => {
         var description = eventData.description;
+        var cover = eventData.cover;
         return (
             <div className="event-item" key={key}>
+                <div className="image-wrapper">{cover && cover.source && <img src={cover.source} className="photo"/>}</div>
                 <div className="name">{eventData.name}</div>
                 <div className="description">{description && (description.substring(0, 50) + '...')}</div>
                 <div className="end-date">{eventData['end_time']}</div>
@@ -51,7 +55,7 @@ export default class EventsList extends React.Component {
 
     render() {
         return (
-            <div>{this.state.events.map(this.renderEvent)}</div>
+            <div className="events-list">{this.state.events.map(this.renderEvent)}</div>
         );
     }
 }
