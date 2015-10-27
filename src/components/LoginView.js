@@ -19,8 +19,9 @@ class LoginView extends React.Component {
 
     constructor(props) {
         super(props);
+        var delay = new Promise(resolve => setTimeout(resolve, 2000));
         FacebookAPI.silentLogin({
-            success: () => history.pushState({}, '/whogos/events'),
+            success: () => delay.then(() => history.pushState({}, '/whogos/events')),
             loginRequired: () => this.setState({ showLogin: true })
         })
     }
@@ -35,14 +36,16 @@ class LoginView extends React.Component {
         return (
             <div className='login-view'>
                 <div className='login-logo'></div>
-                {
-                    this.state.showLogin &&
                     <div className='login-text'>
-                        <div>Please login</div>
-                        <div>with Facebook</div>
-                        <button className='login-button' onClick={this.handleClick}>Take me There</button>
+                    {
+                        this.state.showLogin && 
+                        <div>
+                            <div>Please login</div>
+                            <div>with Facebook</div>
+                            <button className='login-button' onClick={this.handleClick}>Take me There</button>
+                        </div>
+                    }
                     </div>
-                }
             </div>
         );
     }
