@@ -12,6 +12,7 @@ class SplashView extends React.Component {
 
     constructor(props) {
         super(props);
+
         var delay = new Promise(resolve => setTimeout(resolve, 4500));
         var getRoute = new Promise(resolve => {
             FacebookAPI.silentLogin({
@@ -19,12 +20,18 @@ class SplashView extends React.Component {
                loginRequired: () => resolve('/whogos/login')
             });
         });
+
         delay.then(() => getRoute).then(route => history.pushState({}, route));
     }
 
     render() {
         return (
-            <div className='splash-screen'><div className='splash-animation'></div></div>
+            <div className='splash-screen'>
+                <div className='splash-animation'></div>
+                <div className='splash-name'>
+                    <span className='arrow left'></span>whogos<span className='arrow right'></span>
+                </div>
+            </div>
         );
     }
 }
