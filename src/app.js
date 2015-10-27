@@ -18,7 +18,7 @@ ReactDOM.render(
                 <Route path="events-list" component={EventsList}/>
                 <Route path="login" component={LoginView}/>
             </Route>
-            <Redirect from="*" to="/whogos/events-list"/>
+            <Redirect from="*" to="/whogos/login"/>
         </Router>
     )
     , document.getElementById('app'));
