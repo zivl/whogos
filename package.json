@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react-dom": "^0.14.0",
+    "react-flux": "^1.0.0",
+    "react-router": "v1.0.0-beta3"
   }
 }
