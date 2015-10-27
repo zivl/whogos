@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
 
 export default class WhogosApp extends React.Component {
 
@@ -10,7 +12,12 @@ export default class WhogosApp extends React.Component {
     render() {
         return (
             <div className='app'>
-                <h1>Hello World</h1>
+                <Header />
+                <div className="app-body">
+                    <h1>Hello World</h1>
+                    Some text here
+                </div>
+                <Footer />
             </div>
         );
     }
