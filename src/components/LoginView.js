@@ -6,10 +6,6 @@ import React from 'react';
 
 class LoginView extends React.Component {
 
-    state = {
-        fbInit: false
-    }
-
     componentDidMount() {
 
     }
