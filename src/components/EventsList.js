@@ -3,8 +3,11 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FaceBookAPI from '../modules/FacebookAPI';
 import { history } from 'react-router/lib/BrowserHistory';
+
+import FaceBookAPI from '../modules/FacebookAPI';
+import Header from './Header';
+
 import '../../style/eventlist.scss';
 
 
@@ -16,15 +19,12 @@ export default class EventsList extends React.Component {
 
     componentWillMount() {
         FaceBookAPI.getFriendsEvents({
-
             success: this.friendEventsSuccess
-
         });
     }
 
     friendEventsSuccess = events => {
-        console.log(events);
-        this.setState({events});
+        this.setState({ events });
     }
 
     eventDetailsWrapper(eventId) {
