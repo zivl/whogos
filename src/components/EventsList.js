@@ -26,30 +26,27 @@ export default class EventsList extends React.Component {
         this.setState({events});
     }
 
-    renderEvent = (eventData, key) => {
+    eventDetailsWrapper(eventId) {
+        console.log('?????');
+        return () => {
+            console.log('??');
+            history.pushState({}, '/whogos/events/' + eventId);
+        };
+    }
+
+    renderEvent = (eventData) => {
         var description = eventData.description;
         var cover = eventData.cover;
         return (
-            <div className="event-item" key={key}>
+            <div className="event-item" key={eventData.id} onClick={this.eventDetailsWrapper(eventData.id)}>
                 <div className="image-wrapper">{cover && cover.source && <img src={cover.source} className="photo"/>}</div>
                 <div className="name">{eventData.name}</div>
                 <div className="description">{description && (description.substring(0, 50) + '...')}</div>
                 <div className="end-date">{eventData['end_time']}</div>
-                <div>{this.renderEventLocation(eventData.place)}</div>
                 <div>{eventData['start_time']}</div>
                 <div>{eventData.id}</div>
                 <div>{eventData.rsvp_status}</div>
             </div>
-        );
-    }
-
-    renderEventLocation(place) {
-        if(place) {
-
-        }
-
-        return (
-            <div>Location place holder</div>
         );
     }
 
