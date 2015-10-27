@@ -1,12 +1,12 @@
 import React from 'react';
+
 import Header from './Header';
 import Footer from './Footer';
+
 
 export default class WhogosApp extends React.Component {
 
     state = {
-        todos: [],
-        activeItems: 0
     }
 
     render() {
