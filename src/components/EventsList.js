@@ -4,8 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FaceBookAPI from '../modules/FacebookAPI';
-import Header from './Header';
-
+import { history } from 'react-router/lib/BrowserHistory';
 import '../../style/eventlist.scss';
 
 
@@ -30,7 +29,7 @@ export default class EventsList extends React.Component {
 
     eventDetailsWrapper(eventId) {
         return () => {
-            history.pushState({}, '/whogos/events/' + eventId);
+            history.pushState({}, `/whogos/event/${eventId}`);
         };
     }
 
