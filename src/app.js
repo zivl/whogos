@@ -15,7 +15,7 @@ ReactDOM.render(
     (
         <Router history={history}>
             <Route path="/whogos" component={WhogosApp}>
-                <Route path="events-list" component={EventsList}/>
+                <Route path="events" component={EventsList}/>
                 <Route path="login" component={LoginView}/>
             </Route>
             <Redirect from="*" to="/whogos/login"/>

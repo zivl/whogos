@@ -3,57 +3,31 @@
  *
  */
 import React from 'react';
+import FacebookAPI from '../modules/FacebookAPI';
+import { history } from 'react-router/lib/BrowserHistory';
+
 import '../../style/login.scss';
 
 class LoginView extends React.Component {
 
-    componentDidMount() {
+    static propTypes = {}
+    static defaultProps = {}
 
+    state = {
+        showLogin: false
     }
 
-// Here we run a very simple test of the Graph API after login is
-// successful.  See statusChangeCallback() for when this call is made.
-    testAPI = () => {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', (response) => {
-            console.log('Successful login for: ' + response.name);
-
-        });
-    }
-
-// This is called with the results from from FB.getLoginStatus().
-    statusChangeCallback = (response) => {
-        console.log('statusChangeCallback');
-        console.log(response);
-        // The response object is returned with a status field that lets the
-        // app know the current login status of the person.
-        // Full docs on the response object can be found in the documentation
-        // for FB.getLoginStatus().
-        if (response.status === 'connected') {
-            // Logged into your app and Facebook.
-            this.testAPI();
-        } else if (response.status === 'not_authorized') {
-            // The person is logged into Facebook, but not your app.
-            document.getElementById('status').innerHTML = 'Please log into this app.';
-        } else {
-            // The person is not logged into Facebook, so we're not sure if
-            // they are logged into this app or not.
-            document.getElementById('status').innerHTML = 'Please log into Facebook.';
-        }
-    }
-
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
-    checkLoginState = () => {
-        FB.getLoginStatus((response) => {
-            this.statusChangeCallback(response);
-        });
+    constructor(props) {
+        super(props);
+        FacebookAPI.silentLogin({
+            success: () => history.pushState({}, '/whogos/events'),
+            loginRequired: () => this.setState({ showLogin: true })
+        })
     }
 
     handleClick = () => {
-        window.fbReady.then(() => {
-            FB.login(this.statusChangeCallback, {scope: 'user_about_me,user_friends,user_events,email'});
+        FacebookAPI.login({
+            success: () => history.pushState({}, '/whogos/events')
         });
     }
 
@@ -61,16 +35,16 @@ class LoginView extends React.Component {
         return (
             <div className='login-view'>
                 <div className='login-logo'></div>
-                <div className='login-text'>
-                    <div>Please login with Facebook</div>
-                    <button className='login-button' onClick={this.handleClick}>Login</button>
-                </div>
+                {
+                    this.state.showLogin &&
+                    <div className='login-text'>
+                        <div>Please login with Facebook</div>
+                        <button className='login-button' onClick={this.handleClick}>Login</button>
+                    </div>
+                }
             </div>
         );
     }
 }
-
-LoginView.defaultProps = {};
-LoginView.propTypes = {};
 
 export default LoginView;
