@@ -82,7 +82,8 @@ class LoginView extends React.Component {
         });
     }
 
-    handleClick = () => {
+    handleClick = (event) => {
+        event.preventDefault();
         FB.login(function(){}, {scope: 'user_about_me,user_friends,user_events,email'});
     }
 
