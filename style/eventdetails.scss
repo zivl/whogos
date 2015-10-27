@@ -1,0 +1,105 @@
+@import "variables";
+
+.event-details-wrapper {
+
+  color: $text-gray;
+  img {
+    width: 100%;
+  }
+
+  .event-details {
+    padding: 15px;
+    .event-name {
+      font-size: 30px;
+      font-weight: bold;
+      padding-bottom: 20px;
+    }
+
+    .line-separator {
+      background-color: $green;
+      height: 2px;
+      width: 65%;
+    }
+
+    .side-icon {
+      padding-left: 35px;
+      &:before {
+        content: "";
+        position: absolute;
+        height: 25px;
+        width: 25px;
+        left: 15px;
+        background-repeat: no-repeat;
+        background-size: 75%;
+      }
+    }
+
+    .event-date {
+
+      margin: 20px 0;
+      font-size: 20px;
+
+      &.side-icon {
+        &:before {
+          background-image: url('/images/date-icon.png');
+        }
+      }
+
+    }
+
+    .event-details-place {
+      .place-name {
+        font-size: 20px;
+      }
+      &.side-icon {
+        &:before {
+          background-image: url('/images/place-icon.png');
+          height: 30px;
+        }
+      }
+    }
+
+    .event-description {
+      font-size: 10px;
+      margin: 15px 0;
+      &.side-icon {
+        &:before {
+          background-image: url('/images/text-icon.png');
+          height: 30px;
+          background-size: 67%;
+        }
+      }
+    }
+    .people-going {
+      .stupid-padding-in-2am {
+        height: 5px;
+      }
+
+      .people-going-count {
+        color: $cyan;
+      }
+
+      &.side-icon {
+        &:before {
+          background-image: url('/images/logo-icon.png');
+          height: 32px;
+          width: 32px;
+          background-size: 67%;
+        }
+      }
+
+    }
+
+    .button-wrapper {
+      margin: 20px 0;
+      .going-button {
+
+        background: $white;
+        border: 2px solid $black;
+        padding: 5px 25px;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+    }
+  }
+}
