@@ -36,7 +36,7 @@ export default class EventsList extends React.Component {
     renderEvent = (eventData) => {
         var picture = eventData.picture;
         var date = new Date(eventData.start_time);
-        var dateString = date.getMonth()
+        var dateString = date.getMonth();
         return (
             <div className='event-item' key={eventData.id} onClick={this.eventDetailsWrapper(eventData.id)}>
                 <div className='image-wrapper'>
