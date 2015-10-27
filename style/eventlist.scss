@@ -1,7 +1,25 @@
+@import "variables";
+
 .events-list {
+  padding: 15px;
+
   .event-item {
-    div {
+    height: 100px;
+    .image-wrapper {
       display: inline-block;
+      width: 30%;
+      img {
+        height: 70px;
+        width: 70px;
+      }
+    }
+
+    .event-desc {
+      display: inline-block;
+      width: 70%;
+      border-bottom: 2px solid $green;
+      padding-bottom: 10px;
+      vertical-align: top;
     }
   }
 }

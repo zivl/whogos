@@ -1,0 +1,21 @@
+
+.arrow {
+  $border-size: 10px;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: $border-size solid transparent;
+  top: 35%;
+  right: 100%;
+  margin-top: -5px;
+  &.right {
+    border-width: $border-size $border-size $border-size 0;
+    right: 0;
+    border-right-color: $black;
+  }
+  &.left {
+    border-left-color: $black;
+    border-width: $border-size 0 $border-size $border-size;
+    left: 0;
+  }
+}

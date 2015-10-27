@@ -4,6 +4,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FaceBookAPI from '../modules/FacebookAPI';
+import Header from './Header';
+
 import '../../style/eventlist.scss';
 
 
@@ -27,32 +29,38 @@ export default class EventsList extends React.Component {
     }
 
     eventDetailsWrapper(eventId) {
-        console.log('?????');
         return () => {
-            console.log('??');
             history.pushState({}, '/whogos/events/' + eventId);
         };
     }
 
     renderEvent = (eventData) => {
-        var description = eventData.description;
-        var cover = eventData.cover;
+        var picture = eventData.picture;
+        var date = new Date(eventData.start_time);
+        var dateString = date.getMonth()
         return (
-            <div className="event-item" key={eventData.id} onClick={this.eventDetailsWrapper(eventData.id)}>
-                <div className="image-wrapper">{cover && cover.source && <img src={cover.source} className="photo"/>}</div>
-                <div className="name">{eventData.name}</div>
-                <div className="description">{description && (description.substring(0, 50) + '...')}</div>
-                <div className="end-date">{eventData['end_time']}</div>
-                <div>{eventData['start_time']}</div>
-                <div>{eventData.id}</div>
-                <div>{eventData.rsvp_status}</div>
+            <div className='event-item' key={eventData.id} onClick={this.eventDetailsWrapper(eventData.id)}>
+                <div className='image-wrapper'>
+                    {
+                        picture && picture.data && picture.data.url &&
+                        <img src={picture.data.url} className='photo'/>
+                    }
+                </div>
+                <div className='event-desc'>
+                    <div className='name'>{eventData.name}</div>
+                    <div>{eventData['start_time']}</div>
+                </div>
             </div>
         );
     }
 
     render() {
         return (
-            <div className="events-list">{this.state.events.map(this.renderEvent)}</div>
+            <div>
+                <Header />
+
+                <div className='events-list'>{this.state.events.map(this.renderEvent)}</div>
+            </div>
         );
     }
 }

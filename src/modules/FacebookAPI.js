@@ -1,9 +1,13 @@
 
 function extractEvents(response) {
     var events = [];
-    response.friends.data.forEach(friend => {
-        events.push(...friend.events.data);
-    });
+    if(response.friends && response.friends.data) {
+        response.friends.data.forEach(friend => {
+            if (friend.events) {
+                events.push(...friend.events.data);
+            }
+        });
+    }
     return events;
 }
 
@@ -14,7 +18,7 @@ class FacebookAPI {
         FB.api(
             '/me',
             'GET',
-            {"fields": "friends{name,events{name, description, cover, place}}"},
+            {"fields": "friends{name,events{name, start_time, category, place, picture{url}}}"},
             response => {
                 console.log('events',response);
                 if (response && !response.error) {

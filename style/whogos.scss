@@ -31,29 +31,16 @@ body {
 
   	.header {
   		flex: 0 1 50px;
-
-  		border: 2px solid red;
-
   		display: flex;
   		flex-direction: row;
   	}
 
   	.app-body {
   		flex: 1 1 auto;
-
   		display: flex;
   		flex-direction: column;
-
   		overflow-x: hidden;
   	}
 
-  	.footer {
-  		flex: 0 1 50px;
-
-  		border: 2px solid green;
-
-  		display: flex;
-  		flex-direction: row;
-  	}
   }
 }
