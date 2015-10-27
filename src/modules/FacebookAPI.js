@@ -34,7 +34,7 @@ class FacebookAPI {
         FB.api(
             `/${eventId}`,
             'GET',
-            {"fields": "category,cover,description,start_time,end_time,name,attending,place{name,location{latitude,longitude,name,street,city,country}}"},
+            {"fields": "name,start_time,description,category,cover,attending,attending_count,place{name,location{name,street,city,country,latitude,longitude}}"},
             response => {
                 console.log('event',response);
                 if (response && !response.error) {
@@ -44,6 +44,10 @@ class FacebookAPI {
                 }
             }
         );
+    }
+
+    joinEvent(eventId, options) {
+
     }
 
     login(options) {

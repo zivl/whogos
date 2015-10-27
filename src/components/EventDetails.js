@@ -61,11 +61,11 @@ export default class EventDetails extends React.Component {
     }
 
     renderAttendingList() {
-    	return `${ this.state.attending.data.length } people go to the event`;
+    	return `${ this.state.attending_count } people go to the event`;
     }
 
     handleJoinEvent = () => {
-    	console.log('Join Event');
+    	FacebookAPI.joinEvent(this.state.id);
     }
 
 }
