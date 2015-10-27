@@ -42,9 +42,30 @@ export default class EventDetails extends React.Component {
     				<img src={this.state.cover.source} />
     			}
     			<h1>{ this.state.name }</h1>
+    			<div>{ this.state.start_time }</div>
+    			{
+    				this.state.place &&
+	    			<div className='event-details__place'>
+	    				<div>{ this.state.place.name }</div>
+	    				<div>
+	    					{ this.state.place.location.street }
+	    					{ this.state.place.location.city }
+	    				</div>
+	    			</div>
+    			}
     			<div>{ this.state.description }</div>
+    			<div>{ this.renderAttendingList() }</div>
+    			<button onClick={this.handleJoinEvent}>I will go</button>
     		</div>
     	);
+    }
+
+    renderAttendingList() {
+    	return `${ this.state.attending.data.length } people go to the event`;
+    }
+
+    handleJoinEvent = () => {
+    	console.log('Join Event');
     }
 
 }

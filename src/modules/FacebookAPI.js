@@ -34,7 +34,7 @@ class FacebookAPI {
         FB.api(
             `/${eventId}`,
             'GET',
-            {"fields": "category,cover,description,start_time,end_time,name,photos{picture},place{name,location{latitude,longitude,name,street,city,country}}"},
+            {"fields": "category,cover,description,start_time,end_time,name,attending,place{name,location{latitude,longitude,name,street,city,country}}"},
             response => {
                 console.log('event',response);
                 if (response && !response.error) {
