@@ -18,6 +18,10 @@ module.exports = {
     publicPath: 'http://localhost:8080/',
     filename: 'dist/[name].js'
   },
+  devServer: {
+    port: 8080,
+    historyApiFallback: true
+  },
   module: {
     preLoaders: [{
       test: /\.js$/,
