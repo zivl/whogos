@@ -59,7 +59,7 @@ class LoginView extends React.Component {
     render() {
         return (
             <div>
-                <a href="#" onClick={this.handleClick}>Login</a>
+                <button onClick={this.handleClick}>Login</button>
             </div>
         );
     }
