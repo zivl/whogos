@@ -39,6 +39,12 @@
         background-color: $white;
         font-size: 16px;
       }
+
+      &.active {
+        .filter-label {
+          background-color: $cyan;
+        }
+      }
     }
   }
 }

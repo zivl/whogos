@@ -64,10 +64,27 @@ export default class EventsList extends React.Component {
         );
     }
 
+
     genAddRemoveFilterFunc(category) {
         return () => {
-
+            var filters = this.state.filters;
+            if (filters[category]) {
+                delete filters[category];
+            }
+            else {
+                filters[category] = true;
+            }
+            this.setState({filters});
+            console.log(filters);
         };
+    }
+
+
+    filterEvent = (event) => {
+        if (Object.keys(this.state.filters).length) {
+            return this.state.filters[event.category];
+        }
+        return true;
     }
 
     render() {
@@ -81,42 +98,55 @@ export default class EventsList extends React.Component {
 
                 <div className={canvasClassName}>
                     <div className="filter-row">
-                        <div className="filter">
+                        <div className={this.state.filters['DINING_EVENT'] ? "filter active" : "filter"}
+                             onClick={this.genAddRemoveFilterFunc('DINING_EVENT')}
+                            >
                             <div className='image-wrapper'>
                                 <img src="/images/burger.png"/>
                             </div>
 
                             <div className='filter-label'>Food</div>
                         </div>
-                        <div className="filter">
-                            <div className='image-wrapper'><img src="/images/music-icon.png"/></div>
+                        <div className={this.state.filters['MUSIC_EVENT'] ? "filter active" : "filter"}
+                             onClick={this.genAddRemoveFilterFunc('MUSIC_EVENT')}>
+                            <div className="image-wrapper">
+                                <img src="/images/music-icon.png"/>
+                            </div>
                             <div className='filter-label'>
                                 Music
                             </div>
                         </div>
                     </div>
                     <div className="filter-row">
-                        <div className="filter">
-                            <div className='image-wrapper'><img src="/images/icon-educate.png"/></div>
+                        <div className={this.state.filters['EDUCATION_EVENT'] ? "filter active" : "filter"}
+                             onClick={this.genAddRemoveFilterFunc('EDUCATION_EVENT')}>
+                            <div className="image-wrapper">
+                                <img src="/images/icon-educate.png"/></div>
                             <div className='filter-label'>
                                 Educate
                             </div>
                         </div>
-                        <div className="filter">
-                            <div className='image-wrapper'><img src="/images/sport-icon.png"/></div>
+                        <div className={this.state.filters['SPORT_EVENT'] ? "filter active" : "filter"}
+                             onClick={this.genAddRemoveFilterFunc('SPORT_EVENT')}>
+                            <div className='image-wrapper'>
+                                <img src="/images/sport-icon.png"/>
+                            </div>
                             <div className='filter-label'>
                                 Sports
                             </div>
                         </div>
                     </div>
                     <div className="filter-row">
-                        <div className="filter">
-                            <div className='image-wrapper'><img src="/images/art-icon.png"/></div>
+                        <div className={this.state.filters['ART_EVENT'] ? "filter active" : "filter"}
+                             onClick={this.genAddRemoveFilterFunc('ART_EVENT')}>
+                            <div className='image-wrapper'>
+                                <img src="/images/art-icon.png"/></div>
                             <div className='filter-label'>
                                 Art
                             </div>
                         </div>
-                        <div className="filter">
+                        <div className={this.state.filters['FESTIVAL_EVENT'] ? "filter active" : "filter"}
+                             onClick={this.genAddRemoveFilterFunc('FESTIVAL_EVENT')}>
                             <div className='image-wrapper'><img src="/images/party-icon.png"/></div>
                             <div className='filter-label'>
                                 Party
@@ -124,7 +154,7 @@ export default class EventsList extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className='events-list'>{this.state.events.map(this.renderEvent)}</div>
+                <div className='events-list'>{this.state.events.filter(this.filterEvent).map(this.renderEvent)}</div>
             </div>
         );
     }
