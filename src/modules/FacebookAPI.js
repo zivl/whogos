@@ -11,6 +11,8 @@ function extractEvents(response) {
     return events;
 }
 
+var userId = null;
+
 // FB.api(path, method, params, callback)
 class FacebookAPI {
 
@@ -46,6 +48,23 @@ class FacebookAPI {
         );
     }
 
+    getEventStatus(eventId, options) {
+        FB.api(
+            `${eventId}/attending/${userId}`,
+            'GET',
+            {},
+            response => {
+                console.log('event status', respone);
+                if (response && !response.error) {
+                    var isAttending = response.data && response.data.length && (response.data[0].rsvp_status === 'attending');
+                    options.success && options.success(isAttending);
+                } else {
+                    options.error && options.error();
+                }
+            }
+        );
+    }
+
     joinEvent(eventId, options) {
         FB.api(
             `${eventId}/attending`,
@@ -66,6 +85,8 @@ class FacebookAPI {
         window.fbReady.then(() => {
             FB.login(response => {
                 console.log('login', response);
+                userId = response.authResponse.userID;
+
                 if (response.status === 'connected') {
                     options.success && options.success();
                 } else {
@@ -79,6 +100,8 @@ class FacebookAPI {
         window.fbReady.then(() => {
             FB.getLoginStatus(response => {
                 console.log('login', response);
+                userId = response.authResponse.userID;
+
                 if (response.status === 'connected') {
                     options.success && options.success();
                 } else {
