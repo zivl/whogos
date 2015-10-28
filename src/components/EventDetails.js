@@ -9,12 +9,16 @@ import '../../style/eventdetails.scss';
 export default class EventDetails extends React.Component {
 
     state = {
-        loaded: false
+        loaded: false,
+        amIAttending: null
     }
 
     componentWillMount() {
         FacebookAPI.getEventDetails(this.props.params.eventId, {
             success: data => this.setState({...data, loaded: true})
+        });
+        FacebookAPI.getEventStatus(this.props.params.eventId, {
+        	success: amIAttending => this.setState({ amIAttending })
         });
     }
 
@@ -73,12 +77,21 @@ export default class EventDetails extends React.Component {
                     <div className='event-description side-icon'>{ this.state.description }</div>
                     <div className='people-going side-icon'>
                         <div className='stupid-padding-in-2am'></div>
-                        <span
-                        className='people-going-count'>{ this.state.attending_count } people</span> are going
+	                        <span className='people-going-count'>
+	                        {
+	                        	this.state.amIAttending ?
+	                        	`I and ${ this.state.attending_count-1 } people ` :
+	                        	`${ this.state.attending_count } people `
+		                    }
+		                    </span>
+                        	are going
                     </div>
-                    <div className='button-wrapper'>
-                        <button className='going-button' onClick={this.handleJoinEvent}>I'm Going!</button>
-                    </div>
+                    {
+                    	(this.state.amIAttending === false) &&
+	                    <div className='button-wrapper'>
+	                        <button className='going-button' onClick={this.handleJoinEvent}>I'm Going!</button>
+	                    </div>
+	                }
                 </div>
             </div>
         );
@@ -86,7 +99,11 @@ export default class EventDetails extends React.Component {
 
 
     handleJoinEvent = () => {
-        FacebookAPI.joinEvent(this.state.id);
+    	this.setState({ amIAttending: null })
+        FacebookAPI.joinEvent(this.state.id, {
+        	success: () => this.setState({ amIAttending: true }),
+        	error: () => this.setState({ amIAttending: false })
+        });
     }
 
     handleBack = () => {

@@ -11,7 +11,7 @@ function extractEvents(response) {
     return events;
 }
 
-var userId = null;
+var whogosUserId = null;
 
 // FB.api(path, method, params, callback)
 class FacebookAPI {
@@ -50,13 +50,13 @@ class FacebookAPI {
 
     getEventStatus(eventId, options) {
         FB.api(
-            `${eventId}/attending/${userId}`,
+            `${eventId}/attending/${whogosUserId}`,
             'GET',
             {},
             response => {
-                console.log('event status', respone);
+                console.log('event status', response);
                 if (response && !response.error) {
-                    var isAttending = response.data && response.data.length && (response.data[0].rsvp_status === 'attending');
+                    var isAttending = !!(response.data && response.data.length && (response.data[0].rsvp_status === 'attending'));
                     options.success && options.success(isAttending);
                 } else {
                     options.error && options.error();
@@ -71,9 +71,9 @@ class FacebookAPI {
             'POST',
             {},
             response => {
-                console.log('join event', respone);
-                if (response && !response.error) {
-                    options.success && options.success(response);
+                console.log('join event', response);
+                if (response && !response.error && response.success) {
+                    options.success && options.success();
                 } else {
                     options.error && options.error();
                 }
@@ -85,9 +85,10 @@ class FacebookAPI {
         window.fbReady.then(() => {
             FB.login(response => {
                 console.log('login', response);
-                userId = response.authResponse.userID;
 
                 if (response.status === 'connected') {
+                    debugger;
+                    whogosUserId = response.authResponse.userID;
                     options.success && options.success();
                 } else {
                     options.error && options.error();
@@ -100,14 +101,15 @@ class FacebookAPI {
         window.fbReady.then(() => {
             FB.getLoginStatus(response => {
                 console.log('login', response);
-                userId = response.authResponse.userID;
 
                 if (response.status === 'connected') {
+                    debugger;
+                    whogosUserId = response.authResponse.userID;
                     options.success && options.success();
                 } else {
                     options.loginRequired && options.loginRequired();
                 }
-            });
+            }, {scope: 'user_about_me,user_friends,user_events,email,rsvp_event'});
         });
     }
 }
