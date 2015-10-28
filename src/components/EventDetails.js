@@ -58,10 +58,13 @@ export default class EventDetails extends React.Component {
                         this.state.place &&
                         <div className='event-details-place side-icon'>
                             <div className='place-name'>{ this.state.place.name }</div>
-                            <div className='place-address'>
-                                { this.state.place.location.street }
-                                { this.state.place.location.city }
-                            </div>
+                            {
+                            	this.state.place.location &&
+	                            <div className='place-address'>
+	                                { this.state.place.location.street }
+	                                { this.state.place.location.city }
+	                            </div>
+                            }
                         </div>
                     }
                     <div className='event-description side-icon'>{ this.state.description }</div>
