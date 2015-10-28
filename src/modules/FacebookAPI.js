@@ -12,24 +12,30 @@ function extractEvents(response) {
 }
 
 var whogosUserId = null;
+var whogosCachedEvents = null;
 
 // FB.api(path, method, params, callback)
 class FacebookAPI {
 
     getFriendsEvents(options) {
-        FB.api(
-            '/me',
-            'GET',
-            {"fields": "friends{name,events{name, start_time, category, place, picture{url}}}"},
-            response => {
-                console.log('events',response);
-                if (response && !response.error) {
-                    options.success && options.success(extractEvents(response));
-                } else {
-                    options.error && options.error();
+        if (whogosCachedEvents !== null) {
+            setTimeout(() => options.success(whogosCachedEvents), 300);
+        } else {
+            FB.api(
+                '/me',
+                'GET',
+                {"fields": "friends{name,events{name, start_time, category, place, picture{url}}}"},
+                response => {
+                    console.log('events',response);
+                    if (response && !response.error) {
+                        whogosCachedEvents = extractEvents(response);
+                        options.success && options.success(whogosCachedEvents);
+                    } else {
+                        options.error && options.error();
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     getEventDetails(eventId, options) {
@@ -87,7 +93,6 @@ class FacebookAPI {
                 console.log('login', response);
 
                 if (response.status === 'connected') {
-                    debugger;
                     whogosUserId = response.authResponse.userID;
                     options.success && options.success();
                 } else {
@@ -103,7 +108,6 @@ class FacebookAPI {
                 console.log('login', response);
 
                 if (response.status === 'connected') {
-                    debugger;
                     whogosUserId = response.authResponse.userID;
                     options.success && options.success();
                 } else {
