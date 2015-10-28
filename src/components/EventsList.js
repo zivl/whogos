@@ -89,7 +89,7 @@ export default class EventsList extends React.Component {
 
     render() {
         var canvasClassName = 'off-canvas-filters';
-        canvasClassName = this.state.filterMode ? canvasClassName + ' close' : canvasClassName + ' open';
+        canvasClassName = this.state.filterMode ? canvasClassName + ' open' : canvasClassName + ' close';
         return (
             <div>
                 <Header>
