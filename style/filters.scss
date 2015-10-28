@@ -1,21 +1,44 @@
-.offcanvas-filters {
+@import "variables";
+@import "components";
+
+.off-canvas-filters {
   background: white;
+  padding-top: 15px;
   height: 89%;
   width: 90%;
   position: absolute;
-  right: 0;
-  top: 65px;
+  top: 70px;
+  box-shadow: 5px 5px 15px 5px $text-gray;
+  transition: right .5s;
+  &.open {
+    right: 0;
+  }
+  &.close {
+    right: -90%;
+  }
 
   .filter-row {
-    height: 33.33%;
-    position: relative;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 35px;
     .filter {
       margin-top: 2px;
-      height: 100%;
-      width: 120px;
-      border: black solid 1px;
+      width: 100px;
+      border: 2px solid $black;
+      .image-wrapper {
+        height: 66px;
+        overflow: hidden;
+        img {
+          height: 100px;
+        }
+      }
+
+      .filter-label {
+        text-align: center;
+        border-top: 2px solid $black;
+        background-color: $white;
+        font-size: 16px;
+      }
     }
   }
 }

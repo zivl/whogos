@@ -71,28 +71,59 @@ export default class EventsList extends React.Component {
     }
 
     render() {
+        var canvasClassName = 'off-canvas-filters';
+        canvasClassName = this.state.filterMode ? canvasClassName + ' close' : canvasClassName + ' open';
         return (
             <div>
                 <Header>
                     <span className='right-button' onClick={this.openCloseFilters}>Filters</span>
                 </Header>
-                {
-                    this.state.filterMode &&
-                    <div className="offcanvas-filters">
-                        <div className="filter-row">
-                            <div className="filter"><img src="/images/burger.png"/><div>Food</div></div>
-                            <div className="filter"><img src="/images/music-icon.png"/><div>Music</div></div>
+
+                <div className={canvasClassName}>
+                    <div className="filter-row">
+                        <div className="filter">
+                            <div className='image-wrapper'>
+                                <img src="/images/burger.png"/>
+                            </div>
+
+                            <div className='filter-label'>Food</div>
                         </div>
-                        <div className="filter-row">
-                            <div className="filter"><img src="/images/icon-educate.png"/><div>Educate</div></div>
-                            <div className="filter"><img src="/images/sport-icon.png"/><div>Sports</div></div>
-                        </div>
-                        <div className="filter-row">
-                            <div className="filter"><img src="/images/art-icon.png"/><div>Art</div></div>
-                            <div className="filter"><img src="/images/party-icon.png"/><div>Party</div></div>
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/music-icon.png"/></div>
+                            <div className='filter-label'>
+                                Music
+                            </div>
                         </div>
                     </div>
-                }
+                    <div className="filter-row">
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/icon-educate.png"/></div>
+                            <div className='filter-label'>
+                                Educate
+                            </div>
+                        </div>
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/sport-icon.png"/></div>
+                            <div className='filter-label'>
+                                Sports
+                            </div>
+                        </div>
+                    </div>
+                    <div className="filter-row">
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/art-icon.png"/></div>
+                            <div className='filter-label'>
+                                Art
+                            </div>
+                        </div>
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/party-icon.png"/></div>
+                            <div className='filter-label'>
+                                Party
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className='events-list'>{this.state.events.map(this.renderEvent)}</div>
             </div>
         );
