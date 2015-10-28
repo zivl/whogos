@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FacebookAPI from '../modules/FacebookAPI';
 import Header from './Header';
+import { history } from 'react-router/lib/BrowserHistory';
 
 import '../../style/eventdetails.scss';
 
@@ -20,7 +21,9 @@ export default class EventDetails extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header>
+                    <span className='right-button' onClick={this.handleBack}>Back</span>
+                </Header>
                 {
                     this.state.loaded ? this.renderDetails() : this.renderLoader()
                 }
@@ -58,10 +61,13 @@ export default class EventDetails extends React.Component {
                         this.state.place &&
                         <div className='event-details-place side-icon'>
                             <div className='place-name'>{ this.state.place.name }</div>
-                            <div className='place-address'>
-                                { this.state.place.location.street }
-                                { this.state.place.location.city }
-                            </div>
+                            {
+                            	this.state.place.location &&
+	                            <div className='place-address'>
+	                                { this.state.place.location.street }
+	                                { this.state.place.location.city }
+	                            </div>
+                            }
                         </div>
                     }
                     <div className='event-description side-icon'>{ this.state.description }</div>
@@ -81,6 +87,10 @@ export default class EventDetails extends React.Component {
 
     handleJoinEvent = () => {
         FacebookAPI.joinEvent(this.state.id);
+    }
+
+    handleBack = () => {
+    	history.back();
     }
 
 }

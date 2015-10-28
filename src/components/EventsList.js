@@ -66,70 +66,65 @@ export default class EventsList extends React.Component {
 
     genAddRemoveFilterFunc(category) {
         return () => {
-            var filters = this.state.filters;
-            if(filters[category]) {
-                delete filters[category];
-            }
-            else {
-                filters[category] = true;
-            }
-            this.setState({filters});
-            console.log(filters);
+
         };
     }
 
-    filterEvent = (event) => {
-        if(Object.keys(this.state.filters).length) {
-            return this.state.filters[event.category];
-        }
-        return true;
-    }
-
-    /*
-     NEIGHBORHOOD
-     FAMILY_EVENT
-     MUSIC_EVENT
-     DANCE_EVENT
-     FESTIVAL_EVENT
-     ART_EVENT
-     DINING_EVENT
-     */
     render() {
+        var canvasClassName = 'off-canvas-filters';
+        canvasClassName = this.state.filterMode ? canvasClassName + ' close' : canvasClassName + ' open';
         return (
             <div>
                 <Header>
-                    <span className='filters' onClick={this.openCloseFilters}>Filters</span>
+                    <span className='right-button' onClick={this.openCloseFilters}>Filters</span>
                 </Header>
-                {
-                    this.state.filterMode &&
-                    <div className="offcanvas-filters">
-                        <div className="filter-row">
-                            <div className="filter" onClick={this.genAddRemoveFilterFunc('DINING_EVENT')}>
+
+                <div className={canvasClassName}>
+                    <div className="filter-row">
+                        <div className="filter">
+                            <div className='image-wrapper'>
                                 <img src="/images/burger.png"/>
-                                <div>Food</div>
                             </div>
-                            <div className="filter" onClick={this.genAddRemoveFilterFunc('MUSIC_EVENT')}>
-                                <img src="/images/music-icon.png"/>
-                                <div>Music</div>
-                            </div>
+
+                            <div className='filter-label'>Food</div>
                         </div>
-                        <div className="filter-row">
-                            <div className="filter" onClick={this.genAddRemoveFilterFunc('EDUCATION_EVENT')}>
-                                <img src="/images/icon-educate.png"/><div>Educate</div>
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/music-icon.png"/></div>
+                            <div className='filter-label'>
+                                Music
                             </div>
-                            <div className="filter" onClick={this.genAddRemoveFilterFunc('SPORT_EVENT')}>
-                                <img src="/images/sport-icon.png"/><div>Sports</div>
-                            </div>
-                        </div>
-                        <div className="filter-row">
-                            <div className="filter"><img src="/images/art-icon.png" onClick={this.genAddRemoveFilterFunc('ART_EVENT')}/>
-                                <div>Art</div>
-                            </div>
-                            <div className="filter"><img src="/images/party-icon.png" onClick={this.genAddRemoveFilterFunc('FESTIVAL_EVENT')}/><div>Party</div></div>
                         </div>
                     </div>
-                }
-                <div className='events-list'>{this.state.events.filter(this.filterEvent).map(this.renderEvent)}</div>
+                    <div className="filter-row">
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/icon-educate.png"/></div>
+                            <div className='filter-label'>
+                                Educate
+                            </div>
+                        </div>
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/sport-icon.png"/></div>
+                            <div className='filter-label'>
+                                Sports
+                            </div>
+                        </div>
+                    </div>
+                    <div className="filter-row">
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/art-icon.png"/></div>
+                            <div className='filter-label'>
+                                Art
+                            </div>
+                        </div>
+                        <div className="filter">
+                            <div className='image-wrapper'><img src="/images/party-icon.png"/></div>
+                            <div className='filter-label'>
+                                Party
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='events-list'>{this.state.events.map(this.renderEvent)}</div>
             </div>
         );
     }
