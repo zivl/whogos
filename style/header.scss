@@ -1,5 +1,24 @@
 @import "variables";
 
+@keyframes play-logo-animation {
+  0% {background-position: 0;}
+  32% {background-position: 0;}
+  33% {background-position: -79.2px;}
+  33.3% {background-position: -79.2px;}
+  34.3% {background-position: 0;}
+  65% {background-position: 0;}
+  66% {background-position: -79.2px;}
+  66.3% {background-position: -79.2px;}
+  67.3% {background-position: 0;}
+  95.6% {background-position: 0;}
+  96.6% {background-position: -79.2px;}
+  96.9% {background-position: -79.2px;}
+  97.9% { background-position: 0; }
+  98.9% {background-position: -79.2px;}
+  99% {background-position: -79.2px;}
+  100% { background-position: 0; }
+}
+
 .header {
   background-color: $green;
   padding: 20px;
@@ -8,6 +27,15 @@
 
   .header-logo {
     flex-basis: 15%;
+    align-items: center;
+    .logo-animation {
+      width: 26px;
+      height: 26px;
+      background: url('/images/logo_animation_legless.svg') no-repeat;
+      background-size: 105.6px 31.4px;
+      animation: play-logo-animation 20s steps(3) infinite;
+      margin: 0 auto;
+    }
   }
 
   .header-title {
@@ -16,9 +44,11 @@
     font-weight: bold;
     flex-basis: 60%;
     text-align: center;
+    align-items: center;
   }
 
   .filters {
     flex-basis: 20%;
+    align-items: center;
   }
 }
