@@ -1,0 +1,21 @@
+.offcanvas-filters {
+  background: white;
+  height: 89%;
+  width: 90%;
+  position: absolute;
+  right: 0;
+  top: 65px;
+
+  .filter-row {
+    height: 33.33%;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    .filter {
+      margin-top: 2px;
+      height: 100%;
+      width: 120px;
+      border: black solid 1px;
+    }
+  }
+}
