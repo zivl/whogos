@@ -13,7 +13,8 @@ export default class EventsList extends React.Component {
 
     state = {
         events: [],
-        filterMode: false
+        filterMode: false,
+        filters: {}
     }
 
     componentWillMount() {
@@ -32,8 +33,8 @@ export default class EventsList extends React.Component {
         };
     }
 
-    openFilters = () => {
-        this.setState({filterMode: true});
+    openCloseFilters = () => {
+        this.setState({filterMode: !this.state.filterMode});
     }
 
     renderEvent = (eventData) => {
@@ -63,11 +64,17 @@ export default class EventsList extends React.Component {
         );
     }
 
+    genAddRemoveFilterFunc(category) {
+        return () => {
+
+        };
+    }
+
     render() {
         return (
             <div>
                 <Header>
-                    <span className='filters' onClick={this.openFilters}>Filters</span>
+                    <span className='filters' onClick={this.openCloseFilters}>Filters</span>
                 </Header>
                 {
                     this.state.filterMode &&
