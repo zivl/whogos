@@ -27,7 +27,7 @@
 
   .header-logo {
     flex-basis: 15%;
-    align-items: center;
+    align-self: center;
     .logo-animation {
       width: 26px;
       height: 26px;
@@ -44,11 +44,11 @@
     font-weight: bold;
     flex-basis: 60%;
     text-align: center;
-    align-items: center;
+    align-self: center;
   }
 
   .filters {
     flex-basis: 20%;
-    align-items: center;
+    align-self: center;
   }
 }
