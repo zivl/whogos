@@ -22,7 +22,7 @@ export default class EventDetails extends React.Component {
         return (
             <div>
                 <Header>
-                    <span className='filters' onClick={this.handleBack}>Back</span>
+                    <span className='right-button' onClick={this.handleBack}>Back</span>
                 </Header>
                 {
                     this.state.loaded ? this.renderDetails() : this.renderLoader()

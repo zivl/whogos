@@ -74,7 +74,7 @@ export default class EventsList extends React.Component {
         return (
             <div>
                 <Header>
-                    <span className='filters' onClick={this.openCloseFilters}>Filters</span>
+                    <span className='right-button' onClick={this.openCloseFilters}>Filters</span>
                 </Header>
                 {
                     this.state.filterMode &&
