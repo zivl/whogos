@@ -36,7 +36,7 @@ class FacebookAPI {
             'GET',
             {"fields": "name,start_time,description,category,cover,attending,attending_count,place{name,location{name,street,city,country,latitude,longitude}}"},
             response => {
-                console.log('event',response);
+                console.log('event', response);
                 if (response && !response.error) {
                     options.success && options.success(response);
                 } else {
@@ -47,7 +47,19 @@ class FacebookAPI {
     }
 
     joinEvent(eventId, options) {
-
+        FB.api(
+            `${eventId}/attending`,
+            'POST',
+            {},
+            response => {
+                console.log('join event', respone);
+                if (response && !response.error) {
+                    options.success && options.success(response);
+                } else {
+                    options.error && options.error();
+                }
+            }
+        )
     }
 
     login(options) {
@@ -59,7 +71,7 @@ class FacebookAPI {
                 } else {
                     options.error && options.error();
                 }
-            }, {scope: 'user_about_me,user_friends,user_events,email'});
+            }, {scope: 'user_about_me,user_friends,user_events,email,rsvp_event'});
         });
     }
 
