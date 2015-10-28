@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FacebookAPI from '../modules/FacebookAPI';
 import Header from './Header';
+import { history } from 'react-router/lib/BrowserHistory';
 
 import '../../style/eventdetails.scss';
 
@@ -20,7 +21,9 @@ export default class EventDetails extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header>
+                    <span className='filters' onClick={this.handleBack}>Back</span>
+                </Header>
                 {
                     this.state.loaded ? this.renderDetails() : this.renderLoader()
                 }
@@ -84,6 +87,10 @@ export default class EventDetails extends React.Component {
 
     handleJoinEvent = () => {
         FacebookAPI.joinEvent(this.state.id);
+    }
+
+    handleBack = () => {
+    	history.back();
     }
 
 }
