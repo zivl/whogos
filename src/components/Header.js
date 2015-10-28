@@ -7,7 +7,7 @@ class Header extends React.Component {
 	static propTypes = {};
 
 	static defaultProps = {
-        title: 'WhoGoes'
+        title: 'Whogos'
     };
 
 	render() {

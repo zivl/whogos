@@ -27,7 +27,7 @@ class LoginView extends React.Component {
                 <div className='login-text'>
                     <div>Please login</div>
                     <div>with Facebook</div>
-                    <button className='login-button' onClick={this.handleClick}>Take me There</button>
+                    <button className='login-button' onClick={this.handleClick}>Yeh, log me in!</button>
                 </div>
             </div>
         );

@@ -7,12 +7,13 @@
   width: 100%;
 
   .header-logo {
-    flex-basis: 16%;
+    flex-basis: 15%;
   }
 
   .header-title {
-    color: $white;
-    font-size: 20px;
+    color: $black;
+    font-size: 24px;
+    font-weight: bold;
     flex-basis: 60%;
     text-align: center;
   }
