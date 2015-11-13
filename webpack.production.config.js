@@ -1,22 +1,44 @@
-var path = require('path');
+var path = require("path");
+var webpack = require("webpack");
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
-var config = {
-    entry: path.resolve(__dirname, 'src/app.js'),
+module.exports = {
+    cache: true,
+    entry: {
+        bundle: path.resolve(__dirname, 'src/app.js'),
+    },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: 'http://localhost:8080/', // This is used to generate URLs to e.g. images
-        filename: 'bundle.js'
+        path: path.join(__dirname, "dist"),
+        publicPath: "dist/",
+        filename: "[name].js",
+        chunkFilename: "[chunkhash].js"
     },
     module: {
         loaders: [
+
             { test: /\.js$/,  exclude: [node_modules_dir], loader: 'babel?stage=0' },
+
+            // required for react jsx
+            //{ test: /\.js$/,    loader: "jsx-loader" },
+            //{ test: /\.jsx$/,   loader: "jsx-loader?insertPragma=React.DOM" },
+
+            // required to write "require('./style.css')"
+            //{ test: /\.css$/,    loader: "style-loader!css-loader" },
             { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
 
-            // inline base64 URLs for <=8k images, direct URLs for the rest]
-            { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
-        ]
-    }
-};
+            // required for font icons
+            { test: /\.woff$/,   loader: "url-loader?prefix=font/&limit=5000&mimetype=application/font-woff" },
+            { test: /\.ttf$/,    loader: "file-loader?prefix=font/" },
+            { test: /\.eot$/,    loader: "file-loader?prefix=font/" },
+            { test: /\.svg$/,    loader: "file-loader?prefix=font/" },
 
-module.exports = config;
+            {test: /\.(png|jpg|svg)$/, loader: 'url-loader?limit=16384'}
+
+        ]
+    },
+    resolve: {
+
+    },
+    plugins: [
+    ]
+};

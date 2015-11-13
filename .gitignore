@@ -29,3 +29,6 @@ node_modules
 
 # IntelliJ and WebStorm
 .idea
+
+# dist and build folders
+dist

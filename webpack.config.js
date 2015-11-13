@@ -1,3 +1,5 @@
+var webpack = require("webpack");
+
 function getEntrySources(sources) {
     if (process.env.NODE_ENV !== 'production') {
         sources.push('webpack-dev-server/client?http://localhost:8080');
@@ -41,7 +43,9 @@ module.exports = {
                 test: /\.scss$/,
                 loaders: ['style', 'css', 'sass']
             },
-            {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+            {test: /\.(png|jpg|svg)$/, loader: 'url-loader?limit=16384'}
         ]
-    }
+    },
+    plugins: [
+    ]
 };
