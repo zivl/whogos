@@ -27,7 +27,7 @@
   .splash-animation {
     width: 264px;
     height: 420px;
-    background: url('/images/logo_animation.svg') no-repeat;
+    background: url($splash-screen-logo) no-repeat;
     background-size: 1056px 314px;
     animation: play 4s steps(3) infinite;
     margin: 0 auto;

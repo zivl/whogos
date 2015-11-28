@@ -6,3 +6,17 @@ $cyan: #12adef;
 
 
 $text-gray: #363636;
+
+/**
+ * icons and images
+ */
+$path-to-images: "../images/";
+$splash-screen-logo: $path-to-images + "logo_animation.svg";
+$login-logo: $path-to-images + "logo_eye.svg";
+$header-logo: $path-to-images + "logo_animation_legless.svg";
+$event-details-logo-icon: $path-to-images + "logo-icon.png";
+$event-details-text-icon: $path-to-images + "text-icon.png";
+$event-details-place-icon: $path-to-images + "place-icon.png";
+$event-details-date-icon: $path-to-images + "date-icon.png";
+
+

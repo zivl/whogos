@@ -5,7 +5,7 @@
   flex-direction: column;
 
   .login-logo {
-    background: url("/images/logo_eye.svg") no-repeat 80px 96px;
+    background: url($login-logo) no-repeat 80px 96px;
     background-size: 75%;
     flex-basis: 65%;
   }
