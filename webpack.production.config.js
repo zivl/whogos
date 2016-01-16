@@ -2,6 +2,14 @@ var path = require("path");
 var webpack = require("webpack");
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
+var svgoConfig = JSON.stringify({
+    plugins: [
+        {removeTitle: true},
+        {convertColors: {shorthex: false}},
+        {convertPathData: false}
+    ]
+});
+
 module.exports = {
     cache: true,
     entry: {
@@ -9,7 +17,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, "dist"),
-        publicPath: "dist/",
+        publicPath: "",
         filename: "[name].js",
         chunkFilename: "[chunkhash].js"
     },
@@ -30,9 +38,9 @@ module.exports = {
             { test: /\.woff$/,   loader: "url-loader?prefix=font/&limit=5000&mimetype=application/font-woff" },
             { test: /\.ttf$/,    loader: "file-loader?prefix=font/" },
             { test: /\.eot$/,    loader: "file-loader?prefix=font/" },
-            { test: /\.svg$/,    loader: "file-loader?prefix=font/" },
 
-            {test: /\.(png|jpg|svg)$/, loader: 'url-loader?limit=16384'}
+            { test: /\.(png|jpg)$/, loader: 'url-loader?limit=16384' },
+            { test: /\.svg$/,  loaders: ['file-loader', 'svgo-loader'] }
 
         ]
     },
